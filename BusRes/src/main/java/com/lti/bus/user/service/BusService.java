@@ -29,8 +29,13 @@ public class BusService {
 	public void delete(BookingRecords obj) {
 		busDao.delete(obj);
 	}
-	public UserRegistration fetch(int id) {
-		return busDao.fetchCustomer(id);
+	@Transactional
+	public UserRegistration fetchUser(int id) {
+		return busDao.fetchUser(id);
+	}
+	@Transactional
+	public BusAvailibility fetchBus(int id) {
+		return busDao.fetchBus(id);
 	}
 	@Transactional
 	public List<BusAvailibility> fetchRoutes(BusFilter busfil) {

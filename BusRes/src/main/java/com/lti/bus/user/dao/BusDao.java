@@ -31,7 +31,7 @@ public void delete(BookingRecords br) {
 		q.setParameter(1, br.getBookId());
 	}
 	
-	public UserRegistration fetchCustomer(int id){
+	public UserRegistration fetchUser(int id){
 		
 	return entityManager.find(UserRegistration.class, id);	
 	
@@ -97,4 +97,9 @@ public List<BusAvailibility> fetchRouteFilter2(BusFilter busfil) {
 		 q.setParameter(1,id);
 		 return q.getResultList();
 		}
+	public BusAvailibility fetchBus(int id) {
+		
+		return entityManager.find(BusAvailibility.class, id);	
+		
+	}
 }

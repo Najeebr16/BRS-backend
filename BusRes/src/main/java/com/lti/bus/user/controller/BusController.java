@@ -36,7 +36,7 @@ public class BusController {
 		@RequestMapping(path="/findbus/{id}", method=RequestMethod.GET)
 		@CrossOrigin
 		public UserRegistration fetchCustomer(@PathVariable("id") int id) {
-			return busser.fetch(id);
+			return busser.fetchUser(id);
 		}
 		
 		@CrossOrigin
@@ -88,6 +88,18 @@ public class BusController {
 		public List<UserRegistration> search(@PathVariable("id") int id) {
 			return busser.search(id);
 		}
+		@RequestMapping(path="/booking/done/{id},{bus_id}",method=RequestMethod.POST)
+		@CrossOrigin
+		public @ResponseBody Object addbooking(@RequestBody BookingRecords bookingRecords,@PathVariable("id") int id,@PathVariable("bus_id")int bus_id)  {
+			UserRegistration ur=new UserRegistration();
+			ur=busser.fetchUser(id);
+			bookingRecords.setUserRegistration(ur);
+			BusAvailibility ba=new BusAvailibility();
+			ba=busser.fetchBus(bus_id);
+			bookingRecords.setBusAvaibility(ba);
+			busser.add(bookingRecords);
+			return "booking done";
+		}	
 	}
 
 
