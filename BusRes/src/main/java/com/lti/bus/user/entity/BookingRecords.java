@@ -1,4 +1,4 @@
-package com.lti.bus.entity;
+package com.lti.bus.user.entity;
 
 import java.util.Date;
 import javax.persistence.Entity;
@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="booking_details")
@@ -20,7 +22,7 @@ public class BookingRecords {
 	
 @ManyToOne
 @JoinColumn(name="id")
-	private BusRegistration busRegistration;
+	private UserRegistration userRegistration;
 
 @ManyToOne
 @JoinColumn(name="bus_id")
@@ -28,6 +30,7 @@ public class BookingRecords {
  	
 //	private String mail=busRegistration.getEmail();
 	
+	@Temporal(TemporalType.DATE)
 	private Date dateOfBooking;
 	
 	private int NumberOfSeats;
@@ -35,12 +38,12 @@ public class BookingRecords {
 	private Double TotalPrice;
 
 
-		public BusRegistration getBusRegistration() {
-		return busRegistration;
+		public UserRegistration getUserRegistration() {
+		return userRegistration;
 	}
 	
-	public void setBusRegistration(BusRegistration busRegistration) {
-		this.busRegistration = busRegistration;
+	public void setUserRegistration(UserRegistration userRegistration) {
+		this.userRegistration = userRegistration;
 	}
 	
 	public BusAvailibility getBusAvaibility() {
@@ -81,8 +84,10 @@ public class BookingRecords {
 		return TotalPrice;
 	}
 
-	public void setTotalPrice(int numberOfseats) {
-		TotalPrice = numberOfseats * busAvaibility.getTfare();
-	}
+public void setTotalPrice(Double totalPrice) {
+	TotalPrice = totalPrice;
+}
+
+	
 
 }

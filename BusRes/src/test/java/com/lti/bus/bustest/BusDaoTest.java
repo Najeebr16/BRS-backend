@@ -15,10 +15,12 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.bus.admin.dao.AdminDao;
 import com.lti.bus.BusResApplication;
-import com.lti.bus.dao.BusDao;
-import com.lti.bus.entity.BusAvailibility;
-import com.lti.bus.entity.BusRegistration;
+import com.lti.bus.user.dao.BusDao;
+import com.lti.bus.user.entity.Admin;
+import com.lti.bus.user.entity.BusAvailibility;
+import com.lti.bus.user.entity.UserRegistration;
 
 
 	@RunWith(SpringRunner.class)
@@ -29,10 +31,13 @@ import com.lti.bus.entity.BusRegistration;
 		@Autowired
 		private BusDao busDao;
 		
+		@Autowired
+		private AdminDao admdao;
+		
 		@Test
 		@Transactional
 		public void addBus() {
-			BusRegistration br=new BusRegistration();
+			UserRegistration br=new UserRegistration();
 			
 			 br.setFullname("najeeb ur rahman");
 			 br.setEmail("r16najeeb@gmail.com");
@@ -53,12 +58,22 @@ import com.lti.bus.entity.BusRegistration;
 		@Test
 		@Transactional
 		public void fetch() {
-			List<BusRegistration> a=busDao.fetchAll();
+			List<UserRegistration> a=busDao.fetchAll();
 			assertEquals(3, a.size());
 		}
-		
-		
+		@Test
+		@Transactional
+		public void verify() {
+			List<Admin> a =admdao.verifyLogin("najeeb.rahman@lntinfotech.com", "abc123!!");
+			assertEquals(1, a.size());
 		}
+//		@Test
+//		@Transactional
+//		public void verify1() {
+//			List<UserRegistration> a =busDao.verifyLogin("r16najeeb@gmail.com", "123");
+//			assertEquals(1, a.size());
+//		}
+	}
 		
 	
 

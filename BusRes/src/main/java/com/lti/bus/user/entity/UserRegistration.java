@@ -1,6 +1,5 @@
-package com.lti.bus.entity;
+package com.lti.bus.user.entity;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +7,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Bus_Reg")
-public class BusRegistration {
+@Table(name="User_Reg")
+public class UserRegistration {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -20,8 +19,12 @@ public class BusRegistration {
 	private String address;
 	private String dateOfBirth;
 	private String password;
-	@OneToMany(mappedBy="busRegistration")
+	
+	@OneToMany(mappedBy="userRegistration")
 	private Set<BookingRecords> registration;
+	
+	@OneToMany(mappedBy="userreg")
+	private Set<PassengerDetails> passdetails;
 	
 	public int getId() {
 		return id;
